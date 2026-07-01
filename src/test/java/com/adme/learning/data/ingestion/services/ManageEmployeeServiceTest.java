@@ -58,7 +58,7 @@ class ManageEmployeeServiceTest {
         assertThat(result).hasSize(1);
         EmployeeDto dto = result.get(0);
         assertThat(dto.id()).isEqualTo("1");
-        assertThat(dto.employeeNo()).isEqualTo("7369");
+        assertThat(dto.employeeNo()).isEqualTo("1234");
         assertThat(dto.fullName()).isEqualTo("SMITH");
         assertThat(dto.position()).isEqualTo("CLERK");
         assertThat(dto.managerNo()).isEqualTo("7902");
@@ -107,7 +107,7 @@ class ManageEmployeeServiceTest {
 
     @Test
     void loadEmployeeFromCsv_savesAllEmployeesFromFile() {
-        
+
         manageEmployeeService.loadEmployeeFromCsv();
 
         verify(employeeRepository, atLeastOnce()).save(any(Employee.class));

@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // IMPORTANT : remplacez l'URL par celle de VOTRE depot GitHub
                 git branch: 'main', url: 'https://github.com/adme1664/big-data-ingestion.git'
             }
         }
