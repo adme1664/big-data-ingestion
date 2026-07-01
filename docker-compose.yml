@@ -1,0 +1,26 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+  maven:
+    image: maven:3.9-eclipse-temurin-23-alpine
+    working_dir: /app
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    volumes:
+      # Le projet du dossier courant est monte dans le conteneur
+      - .:/app
+      # Cache des dependances Maven (evite de tout retelecharger a chaque fois)
+      - maven-repo:/root/.m2
+    depends_on:
+      - mongodb
+    entrypoint: ["mvn"]
+    command: ["test"]
+
+volumes:
+  maven-repo:
