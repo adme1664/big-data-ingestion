@@ -19,16 +19,8 @@ pipeline {
         }
         stage('SonarQube Analysis') {
                     steps {
-                        script {
-                            withSonarQubeEnv('SonarQubeServer') {
-                                sh """
-                                sonar-scanner \
-                                  -Dsonar.projectKey=big-data-ingestion \
-                                  -Dsonar.sources=. \
-                                  -Dsonar.host.url=http://localhost:9000 \
-                                  -Dsonar.login=${SONAR_AUTH_TOKEN}
-                                """
-                            }
+                        withSonarQubeEnv('SonarQubeServer') {
+                            sh './mvnw -B sonar:sonar -Dsonar.projectKey=big-data-ingestion'
                         }
                     }
                 }
