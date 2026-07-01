@@ -63,6 +63,10 @@ public class ManageEmployeeService {
    return employeeDtos;
   }
 
+  public EmployeeDto getEmployeeByEmployeeNo(String employeeNo) {
+    return employeeRepository.findByEmployeeNo(employeeNo);
+  }
+
   private Employee convertEmployeeDtoToEmployee(EmployeeCsvDto employeeCsvDto) {
     return Employee.builder()
         .employeeNo(employeeCsvDto.getEmployeeNo())

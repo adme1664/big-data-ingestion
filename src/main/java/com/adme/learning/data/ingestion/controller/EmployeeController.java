@@ -4,6 +4,7 @@ import com.adme.learning.data.ingestion.dto.EmployeeDto;
 import com.adme.learning.data.ingestion.services.ManageEmployeeService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,10 @@ public class EmployeeController {
   @GetMapping
   public List<EmployeeDto> getEmployees() {
     return manageEmployeeService.retrieveAllEmployees();
+  }
+
+  @GetMapping("/{employeeNo}")
+  public EmployeeDto findEmployeeByEmployeeNo(@PathVariable String employeeNo) {
+    return manageEmployeeService.getEmployeeByEmployeeNo(employeeNo);
   }
 }
