@@ -17,6 +17,28 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube Analysis') {
+                    steps {
+                        script {
+                            withSonarQubeEnv('SonarQubeServer') {
+                                sh """
+                                sonar-scanner \
+                                  -Dsonar.projectKey=big-data-ingestion \
+                                  -Dsonar.sources=. \
+                                  -Dsonar.host.url=http://sonarqube:9000 \
+                                  -Dsonar.login=${SONAR_AUTH_TOKEN}
+                                """
+                            }
+                        }
+                    }
+                }
+                stage('Quality Gate') {
+                    steps {
+                        timeout(time: 1, unit: 'HOURS') {
+                            waitForQualityGate abortPipeline: true
+                        }
+                    }
+                }
     }
     post {
         always {
