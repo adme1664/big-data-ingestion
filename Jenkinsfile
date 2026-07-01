@@ -37,7 +37,7 @@ pipeline {
                 }
         stage('Package') {
                     steps {
-                        sh 'mvn -B package -DskipTests'
+                        sh './mvnw -B package -DskipTests'
                         // Archive le JAR : telechargeable depuis la page du build / Blue Ocean
                         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                     }
