@@ -11,9 +11,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh 'mvn -B clean package'
+                        sh './mvnw -B clean package'
                     } else {
-                        bat 'mvn -B clean package'
+                        bat 'mvnw -B clean package'
                     }
                 }
             }
