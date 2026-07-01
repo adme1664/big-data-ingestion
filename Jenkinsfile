@@ -22,9 +22,11 @@ pipeline {
                sh './mvnw -B test'
             }
             post{
-            always {}
-                    junit '**/target/surefire-reports/*.xml'
-                }
+            always {
+            junit 'target/surefire-reports/*.xml'}
+            }
+
+
         }
         stage('SonarQube Analysis') {
                     steps {
