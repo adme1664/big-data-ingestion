@@ -47,7 +47,7 @@ jobs:
         run: ./mvnw -B clean compile
   docker-build:
     runs-on: ubuntu-latest
-    needs: test
+    needs: build
     if: github.ref== 'refs/heads/main'
 
     steps:
